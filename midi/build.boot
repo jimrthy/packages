@@ -18,9 +18,13 @@
 (deftask package []
   (comp
    ;; Q: Where can this be downloaded?
-   (download :url "https://raw.githubusercontent.com/jimrthy/MIDI.js/archive/v%s.zip"
+   (download :url (format "https://github.com/jimrthy/MIDI.js/archive/v%s.zip" +lib-version+)
              ;; Q: What kind of checksum is expected here?
-             :checksum "9abcbe7e16600c56e13b2779d096b7a8"
+             :checksum
+             ;; This was the md5sum of my original .zip file
+             ;; "9abcbe7e16600c56e13b2779d096b7a8"
+             ;; This is the version I actually downloaded from github
+             "28c8f96ed13dfa709e423881950d3a72"
              :unzip true)
     (sift :move { #"^MIDI.js.*/dist/midi\.js$"      "cljsjs/midi/development/MIDI.js"
                   #"^MIDI.js.*/dist/midi\.min\.js$" "cljsjs/midi/production/MIDI.min.js" })
